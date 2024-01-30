@@ -84,3 +84,57 @@
 - **Autorisation :** Admin ou l'utilisateur concerné
 - **Paramètre :** `pseudo` de l'utilisateur à supprimer
 - **Réponse :** Message confirmant la suppression.
+
+--- 
+
+## Roles
+
+### Créer un Nouveau Rôle
+
+- **Méthode HTTP :** `POST`
+- **Endpoint :** `/festivaldujeu/api/roles`
+- **Autorisation :** Admin
+- **Body :**
+
+    ```json
+    {
+        "nom": "ADMIN"
+    }
+    ```
+
+- **Description :** Crée un nouveau rôle avec le nom fourni.
+- **Réponse :** Un objet rôle créé.
+
+### Récupérer Tous les Rôles
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/festivaldujeu/api/roles`
+- **Description :** Récupère une liste de tous les rôles.
+- **Réponse :** Liste des rôles.
+
+### Récupérer un Rôle
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/festivaldujeu/api/roles/:id`
+- **Paramètre :** `id` du rôle
+- **Description :** Récupère les détails d'un rôle spécifique.
+- **Réponse :** Détails du rôle demandé.
+
+### Modifier un Rôle
+
+- **Méthode HTTP :** `PUT`
+- **Endpoint :** `/festivaldujeu/api/roles/:id`
+- **Autorisation :** Admin
+- **Paramètre :** `id` du rôle à modifier
+- **Body :** Données à mettre à jour pour le rôle.
+- **Description :** Modifie les informations d'un rôle existant.
+- **Réponse :** Détails du rôle mis à jour.
+
+### Supprimer un Rôle
+
+- **Méthode HTTP :** `DELETE`
+- **Endpoint :** `/festivaldujeu/api/roles/:id`
+- **Autorisation :** Admin
+- **Paramètre :** `id` du rôle à supprimer
+- **Description :** Supprime un rôle existant.
+- **Réponse :** Confirmation de la suppression.
