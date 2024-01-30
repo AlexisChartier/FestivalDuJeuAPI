@@ -1,5 +1,26 @@
 # FestivalDuJeuAPI
 
+## Menu
+
+- [Technologies Utilisées](#technologies-utilisées)
+- [Routes API](#routes-api)
+  - [Users](#users)
+  - [Roles](#roles)
+
+## Technologies Utilisées
+
+Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivantes :
+
+- **Node.js** : Environnement d'exécution JavaScript côté serveur.
+- **Express** : Framework pour applications web Node.js.
+- **MySQL** : Système de gestion de base de données relationnelle.
+- **Sequelize** : ORM (Object-Relational Mapping) pour Node.js.
+- **bcrypt** : Bibliothèque pour le hachage de mots de passe.
+- **jsonwebtoken** : Implémentation des JSON Web Tokens pour l'authentification.
+- **dotenv** : Module pour charger des variables d'environnement à partir de `.env`.
+- **express-validator** : Middleware pour la validation des requêtes.
+
+---
 ---
 
 # Routes API
