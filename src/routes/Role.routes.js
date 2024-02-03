@@ -1,6 +1,8 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const RoleController = require('../controllers/RoleController');
+const {validationErrorMessage} = require('../utils');
+
 
 const router = express.Router();
 
@@ -21,7 +23,7 @@ const createRoleValidationRules = [
 router.post('/roles', authenticateAdmin, createRoleValidationRules, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ error: errors.array()[0].msg });
+    return res.status(400).json(validationErrorMessage(errors.array()));
   }
   RoleController.createRole(req,res);
 });

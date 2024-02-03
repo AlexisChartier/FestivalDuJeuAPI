@@ -4,15 +4,15 @@ const db_config = require('../config/db')
 const db = {}
 const sequelize = new Sequelize(db_config.DB, db_config.USER, db_config.PASSWORD, db_config.CONFIG)
 // Import all models
-db.CreneauxEspace = require('./CreneauxEspace')(sequelize)
+db.CreneauxZone = require('./CreneauxZone')(sequelize)
 db.CreneauxPoste = require('./CreneauxPoste')(sequelize)
-db.Espace = require('./Espace')(sequelize)
+db.Zone = require('./Zone')(sequelize)
 db.Festival = require('./Festival')(sequelize)
 db.FestivalPoste = require('./FestivalPoste')(sequelize)
-db.InscriptionCreneauxEspace = require('./InscriptionCreneauxEspace')(sequelize)
+db.InscriptionCreneauxZone = require('./InscriptionCreneauxZone')(sequelize)
 db.InscriptionCreneauxPoste = require('./InscriptionCreneauxPoste')(sequelize)
 db.Jeu = require('./Jeu')(sequelize)
-db.JeuEspace = require('./JeuEspace')(sequelize)
+db.JeuZone = require('./JeuZone')(sequelize)
 db.PlageHoraire = require('./PlageHoraire')(sequelize)
 db.Poste = require('./Poste')(sequelize)
 db.Role = require('./Role')(sequelize)
@@ -31,23 +31,23 @@ db.FestivalPoste.belongsTo(db.Festival, { foreignKey: 'idFestival', constraints:
 // FestivalPoste -> Poste
 db.FestivalPoste.belongsTo(db.Poste, { foreignKey: 'idPoste', constraints: false });
 
-// Espace -> Festival
-db.Espace.belongsTo(db.Festival, { foreignKey: 'idFestival', constraints: false });
+// Zone -> Festival
+db.Zone.belongsTo(db.Festival, { foreignKey: 'idFestival', constraints: false });
 
-// Espace -> Poste
-db.Espace.belongsTo(db.Poste, { foreignKey: 'idPoste', constraints: false });
+// Zone -> Poste
+db.Zone.belongsTo(db.Poste, { foreignKey: 'idPoste', constraints: false });
 
-// JeuEspace -> Jeu
-db.JeuEspace.belongsTo(db.Jeu, { foreignKey: 'idJeu', constraints: false });
+// JeuZone -> Jeu
+db.JeuZone.belongsTo(db.Jeu, { foreignKey: 'idJeu', constraints: false });
 
-// JeuEspace -> Espace
-db.JeuEspace.belongsTo(db.Espace, { foreignKey: 'idEspace', constraints: false });
+// JeuZone -> Zone
+db.JeuZone.belongsTo(db.Zone, { foreignKey: 'idZone', constraints: false });
 
-// CreneauxEspace -> Espace
-db.CreneauxEspace.belongsTo(db.Espace, { foreignKey: 'idEspace', constraints: false });
+// CreneauxZone -> Zone
+db.CreneauxZone.belongsTo(db.Zone, { foreignKey: 'idZone', constraints: false });
 
-// CreneauxEspace -> PlageHoraire
-db.CreneauxEspace.belongsTo(db.PlageHoraire, { foreignKey: 'plageHoraire', constraints: false });
+// CreneauxZone -> PlageHoraire
+db.CreneauxZone.belongsTo(db.PlageHoraire, { foreignKey: 'plageHoraire', constraints: false });
 
 // PlageHoraire -> Festival
 db.PlageHoraire.belongsTo(db.Festival, { foreignKey: 'idFestival', constraints: false });
@@ -55,11 +55,11 @@ db.PlageHoraire.belongsTo(db.Festival, { foreignKey: 'idFestival', constraints: 
 // User -> Role
 db.User.belongsTo(db.Role, { foreignKey: 'role', constraints: false });
 
-// InscriptionCreneauxEspace -> User
-db.InscriptionCreneauxEspace.belongsTo(db.User, { foreignKey: 'idUser', constraints: false });
+// InscriptionCreneauxZone -> User
+db.InscriptionCreneauxZone.belongsTo(db.User, { foreignKey: 'idUser', constraints: false });
 
-// InscriptionCreneauxEspace -> CreneauxEspace
-db.InscriptionCreneauxEspace.belongsTo(db.CreneauxEspace, { foreignKey: 'idCreneauxEspace', constraints: false });
+// InscriptionCreneauxZone -> CreneauxZone
+db.InscriptionCreneauxZone.belongsTo(db.CreneauxZone, { foreignKey: 'idCreneauxZone', constraints: false });
 
 // CreneauxPoste -> PlageHoraire
 db.CreneauxPoste.belongsTo(db.PlageHoraire, { foreignKey: 'plageHoraire', constraints: false });

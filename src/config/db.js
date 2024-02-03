@@ -13,7 +13,8 @@ module.exports = {
         dialectOptions: {
             ssl: {
                 ca: fs.readFileSync(process.env.MYSQL_ATTR_SSL_CA).toString()
-            }
+            },
+            connectTimeout: 20000
         }
     }   
 }

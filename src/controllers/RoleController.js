@@ -1,4 +1,4 @@
-const db = require('../models'); // Assurez-vous que le chemin est correct
+const db = require('../models'); 
 const Role = db.Role;
 const utils = require('../utils');
 

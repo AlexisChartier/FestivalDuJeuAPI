@@ -1,26 +1,28 @@
 const { Model, DataTypes } = require('sequelize');
 
-class JeuEspace extends Model {}
+class Zone extends Model {}
 
 module.exports = (sequelize) => {
-  JeuEspace.init({
-    idJeu: {
+  Zone.init({
+    idZone: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    idEspace: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
+    nom: {
+      type: DataTypes.STRING(30)
     },
-    recu: {
-      type: DataTypes.BOOLEAN
+    idFestival: {
+      type: DataTypes.INTEGER
+    },
+    idPoste: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
-    modelName: 'JeuEspace',
+    modelName: 'Zone',
     timestamps: false,
     freezeTableName: true
   });
 
-  return JeuEspace;
+  return Zone;
 };

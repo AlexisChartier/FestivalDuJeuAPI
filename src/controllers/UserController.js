@@ -1,4 +1,4 @@
-const db = require('../models'); // Assurez-vous que le chemin est correct
+const db = require('../models');
 const User = db.User;
 const Role = db.Role;
 const utils = require('../utils');
@@ -242,6 +242,29 @@ const UserController = {
             user.email = undefined;
             return res.status(200).json(user);
         } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupérer le nom, le prénom et l'email des bénévoles avec hébergement = true
+     * Requête GET sans paramètre
+     * Retourne une liste de bénévoles avec hébergement
+     * 
+     */
+    async getUserWithHebergement(req, res) {
+        try {
+            // Vérifier que l'user est au moins un bénévole
+            if(req.user.role < 2){
+                return res.status(403).json({ error: "Vous n'êtes pas autorisé à récupérer les bénévoles avec hébergement" });
+            }
+            let users = await User.findAll({
+                where: { hebergement: true },
+                attributes: ['nom', 'prenom', 'email']
+            });
+            return res.status(200).json(users);
+        } catch (error) {
+            console.log("ici")
             return res.status(400).json({ error: error.message });
         }
     }

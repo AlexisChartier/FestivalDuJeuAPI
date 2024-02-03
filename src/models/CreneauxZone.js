@@ -1,14 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 
-class CreneauxEspace extends Model {}
+class CreneauxZone extends Model {}
 
 module.exports = (sequelize) => {
-  CreneauxEspace.init({
-    idCreneauxEspace: {
+  CreneauxZone.init({
+    idCreneauxZone: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    idEspace: {
+    idZone: {
       type: DataTypes.INTEGER
     },
     plageHoraire: {
@@ -19,10 +19,10 @@ module.exports = (sequelize) => {
     }
   }, {
     sequelize,
-    modelName: 'CreneauxEspace',
+    modelName: 'CreneauxZone',
     timestamps: false,
     freezeTableName: true
   });
 
-  return CreneauxEspace;
+  return CreneauxZone;
 };

@@ -1,23 +1,23 @@
 const { Model, DataTypes } = require('sequelize');
 
-class InscriptionCreneauxEspace extends Model {}
+class InscriptionCreneauxZone extends Model {}
 
 module.exports = (sequelize) => {
-  InscriptionCreneauxEspace.init({
+  InscriptionCreneauxZone.init({
     idUser: {
       type: DataTypes.STRING(30),
       primaryKey: true
     },
-    idCreneauxEspace: {
+    idCreneauxZone: {
       type: DataTypes.INTEGER,
       primaryKey: true
     }
   }, {
     sequelize,
-    modelName: 'InscriptionCreneauxEspace',
+    modelName: 'InscriptionCreneauxZone',
     timestamps: false,
     freezeTableName: true
   });
 
-  return InscriptionCreneauxEspace;
+  return InscriptionCreneauxZone;
 };

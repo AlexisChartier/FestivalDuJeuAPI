@@ -1,6 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const UserController = require('../controllers/UserController');
+const {validationErrorMessage} = require('../utils');
 
 const router = express.Router();
 
@@ -58,7 +59,7 @@ const loginValidationRules = [
 router.post('/users', createUserValidationRules, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json(validationErrorMessage(errors.array()));
   }
   UserController.createUser(req, res);
 });
@@ -88,7 +89,7 @@ router.get('/users/check/:pseudo', UserController.checkIfUserExists);
 router.post('/users/login', loginValidationRules, (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json(validationErrorMessage(errors.array()));
     }
     UserController.login(req, res);
 });
@@ -118,7 +119,9 @@ router.put('/users/:pseudo',authenticateToken, updateUserValidationRules, (req, 
 // Uniquement pour un admin ou l'utilisateur concerné
 router.delete('/users/:pseudo',authenticateToken, UserController.deleteUser);
 
-// Récupérer l'utilisateurs avec son role (useless ?)
-//router.get('/users/:pseudo/role',authenticateToken, UserController.getUserWithRole);
+// Récupérer l'utilisateurs qui propose leur hébergement 
+// Requête GET sans paramètre
+// Uniquement pour un utilisateur connecté au niveau 2 (BENEVOLE)
+router.get('/hebergement',authenticateToken, UserController.getUserWithHebergement);
 
 module.exports = router;
