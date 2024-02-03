@@ -96,12 +96,16 @@ const UserController = {
             if(user){
                 user = user.get({ plain: true })
                 // Enlever le mot de passe 
-                user.mdp = undefined;
                 // Si l'utilisateur n'est pas un admin, il ne peut récupérer que des infos superflues
                 if(req.user.role !== 4 && req.user.pseudo !== user.pseudo){
                     // Enlever le mot de passe, l'email, le numéro de téléphone
-                    user.tel = undefined;
-                    user.email = undefined;
+                    delete user.mdp;
+                    delete user.tel;
+                    delete user.nom;
+                    delete user.prenom;
+                    delete user.associations;
+                    delete user.tailleTshirt;
+                    delete user.hebergement;
                 } 
                 // Si l'utilisateur est un référent, il récupère les infos de contact des bénévoles
 

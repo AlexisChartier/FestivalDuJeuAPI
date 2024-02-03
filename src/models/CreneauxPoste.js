@@ -4,9 +4,10 @@ class CreneauxPoste extends Model {}
 
 module.exports = (sequelize) => {
   CreneauxPoste.init({
-    idCreneauxPoste: {
+    idCreneauPoste: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     plageHoraire: {
       type: DataTypes.INTEGER

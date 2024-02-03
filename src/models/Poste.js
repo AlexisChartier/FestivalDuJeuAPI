@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     idPoste: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true // Ajoutez ceci si idPoste doit être auto-incrémenté
+      autoIncrement: true 
     },
     nom: {
       type: DataTypes.STRING(30)

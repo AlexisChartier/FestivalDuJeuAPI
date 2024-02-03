@@ -4,6 +4,8 @@ const utils = require('../utils');
 const Jeu = db.Jeu;
 const Zone = db.Zone;
 const JeuZone = db.JeuZone;
+const PlageHoraire = db.PlageHoraire;
+const CreneauxZone = db.CreneauxZone;
 
 const JeuController = {
     
@@ -146,7 +148,7 @@ const JeuController = {
         // Pour chaque ligne du fichier CSV
         // Vérifier les données
         try {
-            csvData.forEach(async (row) => {
+            await csvData.forEach(async (row) => {
                 // Converssion des données pour les adapter à la base de données
                 // Convertir les valeurs des colonnes 'À animer' et 'Reçu' en booléens (true ou false) sachant que leur valeur est "oui" ou "non"
                 if(row['À animer'] === "oui" || row['À animer'] === "non") row['À animer'] = row['À animer'] === "oui";
@@ -194,6 +196,9 @@ const JeuController = {
                 if(row.Notice.length > 255){
                     row.Notice = row.Notice.split('?')[0];
                 }
+
+                // Récupérer les plages horaires du festival 
+                const plagesHoraires = await PlageHoraire.findAll({where: {idFestival: idFestival}});
 
                 // Créer le jeu si il n'existe pas
                 Jeu.findOrCreate({
@@ -263,11 +268,22 @@ const JeuController = {
                                 recu: row.Reçu
                             });
                         });
+                        // Pour chaque plage horaire, créer un créneau pour le jeu
+                        plagesHoraires.forEach(async (plageHoraire) => {
+                            await CreneauxZone.findOrCreate({
+                                where: {idZone: zone.idZone, plageHoraire: plageHoraire.idPlage},
+                                defaults: {
+                                    idZone: zone.idZone,
+                                    plageHoraire: plageHoraire.idPlage,
+                                    nombreMax: 2
+                                }
+                            });
+                        });
+
                     });
                 }
                
             });
-            return
         } catch (error) {
             return error
         }

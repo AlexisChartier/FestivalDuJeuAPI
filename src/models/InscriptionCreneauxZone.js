@@ -4,11 +4,11 @@ class InscriptionCreneauxZone extends Model {}
 
 module.exports = (sequelize) => {
   InscriptionCreneauxZone.init({
-    idUser: {
+    pseudo: {
       type: DataTypes.STRING(30),
       primaryKey: true
     },
-    idCreneauxZone: {
+    idCreneauZone: {
       type: DataTypes.INTEGER,
       primaryKey: true
     }

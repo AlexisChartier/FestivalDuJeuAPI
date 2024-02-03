@@ -4,9 +4,10 @@ class CreneauxZone extends Model {}
 
 module.exports = (sequelize) => {
   CreneauxZone.init({
-    idCreneauxZone: {
+    idCreneauZone: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     idZone: {
       type: DataTypes.INTEGER

@@ -4,11 +4,11 @@ class InscriptionCreneauxPoste extends Model {}
 
 module.exports = (sequelize) => {
   InscriptionCreneauxPoste.init({
-    idUser: {
+    pseudo: {
       type: DataTypes.STRING(30),
       primaryKey: true
     },
-    idCreneauxPoste: {
+    idCreneauPoste: {
       type: DataTypes.INTEGER,
       primaryKey: true
     }

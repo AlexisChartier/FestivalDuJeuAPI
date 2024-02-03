@@ -64,4 +64,9 @@ router.delete('/postes/:id', authenticateAdmin, PosteController.deletePoste);
 // Requête GET avec un paramètre 'id' (ex: /postes/festival/1)
 router.get('/postes/festival/:id', authenticateToken, PosteController.getPostesByFestival);
 
+// Récupérer le référent d'un poste
+// Requête GET avec un paramètre 'id' (ex: /postes/1/referent)
+router.get('/postes/:id/referent', authenticateToken, PosteController.getReferentByPoste);
+
+
 module.exports = router;

@@ -6,16 +6,17 @@ module.exports = (sequelize) => {
   PlageHoraire.init({
     idPlage: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     heureDebut: {
-      type: DataTypes.STRING(5)
+      type: DataTypes.TIME
     },
     heureFin: {
-      type: DataTypes.STRING(5)
+      type: DataTypes.TIME
     },
     jour: {
-      type: DataTypes.STRING(10)
+      type: DataTypes.DATE
     },
     idFestival: {
       type: DataTypes.INTEGER

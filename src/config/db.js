@@ -15,6 +15,12 @@ module.exports = {
                 ca: fs.readFileSync(process.env.MYSQL_ATTR_SSL_CA).toString()
             },
             connectTimeout: 20000
+        },
+        pool: {
+            max: 10,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
         }
     }   
 }
