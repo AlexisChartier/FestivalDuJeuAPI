@@ -632,3 +632,69 @@ Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivante
 - **Endpoint :** `/creneaux/zone/:id`
 - **Autorisation :** Admin
 - **Description :** Supprime un créneau de zone spécifique et retourne un message de confirmation.
+
+## Inscriptions de Poste
+
+### Créer des Inscriptions de Poste
+
+- **Méthode HTTP :** `POST`
+- **Endpoint :** `/inscriptions/poste`
+- **Autorisation :** Utilisateur connecté
+- **Body :**
+
+    ```json
+    [
+      {
+        "idCreneauPoste": 1,
+        "pseudo": "user123"
+      },
+      ...
+    ]
+    ```
+
+- **Description :** Crée des inscriptions de poste pour les utilisateurs. Chaque inscription nécessite un `idCreneauPoste` et un `pseudo`.
+- **Réponse :** Les inscriptions de poste créées.
+
+### Récupérer les Créneaux de Poste d'un Utilisateur pour un Festival
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/inscriptions/postes/festival/:idFestival/:pseudo`
+- **Autorisation :** Utilisateur connecté
+- **Paramètres :**
+  - `idFestival` : L'identifiant du festival.
+  - `pseudo` : Le pseudo de l'utilisateur.
+- **Description :** Récupère tous les créneaux de poste d'un utilisateur pour un festival spécifique.
+- **Réponse :** Un tableau de créneaux de poste.
+
+## Inscriptions de Zone
+
+### Créer des Inscriptions de Zone
+
+- **Méthode HTTP :** `POST`
+- **Endpoint :** `/inscriptions/zone`
+- **Autorisation :** Utilisateur connecté
+- **Body :**
+
+    ```json
+    [
+      {
+        "idCreneauZone": 1,
+        "pseudo": "user123"
+      },
+      ...
+    ]
+    ```
+
+- **Description :** Crée des inscriptions de zone pour les utilisateurs. Chaque inscription nécessite un `idCreneauZone` et un `pseudo`.
+- **Réponse :** Les inscriptions de zone créées.
+
+### Récupérer les Créneaux de Zone d'un Utilisateur pour un Festival
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/inscriptions/zones/festival/:idFestival/:pseudo`
+- **Autorisation :** Utilisateur connecté
+- **Paramètres :**
+  - `idFestival` : L'identifiant du festival.
+  - `pseudo` : Le pseudo de l'utilisateur.
+- **Description :** Récupère tous les créneaux de zone d'un utilisateur pour un festival spécifique.
+- **Réponse :** Un tableau de créneaux de zone.
