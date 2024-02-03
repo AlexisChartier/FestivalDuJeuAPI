@@ -6,6 +6,15 @@
 - [Routes API](#routes-api)
   - [Users](#users)
   - [Roles](#roles)
+  - [Zones](#zones)
+  - [Jeux](#jeux)
+  - [Postes](#postes)
+  - [Festivals](#festivals)
+  - [Plages Horaires](#plages-horaires)
+  - [Créneaux de Poste](#créneaux-de-poste)
+  - [Créneaux de Zone](#créneaux-de-zone)
+  - [Inscriptions de Poste](#inscriptions-de-poste)
+  - [Inscriptions de Zone](#inscriptions-de-zone)
 
 ## Technologies Utilisées
 
