@@ -1,6 +1,11 @@
 require('dotenv').config()
 const fs = require('fs')
 const mysql = require('mysql2')
+const path = require('path')
+
+// get the ath to the certificate
+const ca = path.resolve(__dirname, '../ssl/mysql-ca.pem')
+
 
 module.exports = {
     DB : process.env.DB_NAME, 
@@ -12,7 +17,7 @@ module.exports = {
         dialectModule: mysql,
         dialectOptions: {
             ssl: {
-                ca: fs.readFileSync(process.env.MYSQL_ATTR_SSL_CA).toString()
+                ca: fs.readFileSync(ca).toString()
             },
             connectTimeout: 20000
         },
