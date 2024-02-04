@@ -136,7 +136,7 @@ router.post('/festivals/inscription', authenticateToken, FestivalController.regi
 
 // Savoir si il y a un festival en cours 
 // Requête GET sans paramètre
-router.get('/festivals/encours', authenticateToken, FestivalController.isFestivalInCourse);
+router.get('/festivalencours', authenticateToken, FestivalController.isFestivalInCourse);
 
 
 
