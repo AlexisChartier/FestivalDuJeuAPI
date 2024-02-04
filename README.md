@@ -506,7 +506,7 @@ Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivante
 ### Savoir si il y a un Festival en Cours
 
 - **Méthode HTTP :** `GET`
-- **Endpoint :** `/festivals/encours`
+- **Endpoint :** `/festivalencours`
 - **Autorisation :** Utilisateur connecté
 - **Description :** Cette route permet de savoir si un festival est actuellement en cours. Aucun paramètre n'est nécessaire pour cette requête. L'accès est restreint aux utilisateurs authentifiés.
 - **Réponse :** La réponse à cette requête peut varier selon que l'utilisateur est authentifié et si un festival est actuellement en cours ou non. Si un festival est en cours, les détails du festival en cours sont retournés. Sinon, un message ou un statut indiquant qu'aucun festival n'est en cours peut être retourné.
