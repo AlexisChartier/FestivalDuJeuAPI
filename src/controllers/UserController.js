@@ -147,7 +147,7 @@ const UserController = {
                     return res.status(200).json({ error: "Identifiants incorrects" });
                 }
             }else{
-                return res.status(200).json({ error: "Identifiants incorrects" });
+                return res.status(200).json({ error: "Utilisateur non trouvé" });
             }
         }catch(error){
             return res.status(400).json({ error: "Une erreur est survenue lors de l'authentification" });
