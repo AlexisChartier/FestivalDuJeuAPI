@@ -124,4 +124,9 @@ router.delete('/users/:pseudo',authenticateToken, UserController.deleteUser);
 // Uniquement pour un utilisateur connecté au niveau 2 (BENEVOLE)
 router.get('/hebergement',authenticateToken, UserController.getUserWithHebergement);
 
+// Récupérer le role et le pseudo a partir du token
+// Requête GET sans paramètre
+// Pour un utilisateur connecté
+router.get('/users/role',authenticateToken, UserController.getUserRoleAndNameFromToken);
+
 module.exports = router;

@@ -108,6 +108,14 @@ Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivante
 
 - **Réponse :** Token JWT si les identifiants sont corrects.
 
+### Récupérer le Rôle et le Pseudo à partir du Token
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/users/role`
+- **Autorisation :** Utilisateur connecté
+- **Description :** Cette route est conçue pour récupérer les informations de rôle et le pseudo de l'utilisateur connecté à partir du token JWT fourni lors de l'authentification. Aucun paramètre supplémentaire n'est nécessaire pour cette requête.
+- **Réponse :** La réponse inclura le rôle et le pseudo de l'utilisateur, permettant ainsi à l'application client de personnaliser l'expérience utilisateur en fonction de son rôle et d'afficher son pseudo. Cela peut être particulièrement utile pour les interfaces qui adaptent leur contenu ou leurs fonctionnalités en fonction du rôle de l'utilisateur (administrateur, bénévole, etc.).
+
 ### Mettre à Jour un Utilisateur
 
 - **Méthode HTTP :** `PUT`
@@ -494,6 +502,15 @@ Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivante
     ```
 
 - **Description :** Permet à l'utilisateur connecté de s'inscrire à un festival en fournissant l'`idFestival` dans le corps de la requête. Cette action est disponible pour tous les utilisateurs authentifiés.
+
+### Savoir si il y a un Festival en Cours
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/festivals/encours`
+- **Autorisation :** Utilisateur connecté
+- **Description :** Cette route permet de savoir si un festival est actuellement en cours. Aucun paramètre n'est nécessaire pour cette requête. L'accès est restreint aux utilisateurs authentifiés.
+- **Réponse :** La réponse à cette requête peut varier selon que l'utilisateur est authentifié et si un festival est actuellement en cours ou non. Si un festival est en cours, les détails du festival en cours sont retournés. Sinon, un message ou un statut indiquant qu'aucun festival n'est en cours peut être retourné.
+
 
 
 ## Plage Horaires

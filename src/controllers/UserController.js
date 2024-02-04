@@ -272,7 +272,25 @@ const UserController = {
             });
             return res.status(200).json(users);
         } catch (error) {
-            console.log("ici")
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupéreer le role et le nom d'un utilisateur qui envoie son token
+     */
+    async getUserRoleAndNameFromToken(req,res){
+        try{
+            const user = await User.findByPk(req.user.pseudo);
+            if(user){
+                const returnedUser = {}
+                returnedUser.role = user.role;
+                returnedUser.nom = user.nom;
+                return res.status(200).json(returnedUser);
+            }else{
+                return res.status(404).json({ error: "Utilisateur non trouvé" });
+            }
+        }catch(error){
             return res.status(400).json({ error: error.message });
         }
     }

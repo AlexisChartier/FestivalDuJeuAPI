@@ -237,6 +237,33 @@ const FestivalController = {
         } else {
             return res.status(404).json({ error: "Le festival n'existe pas" });
         }
+    },
+    /**
+     * Savoir si il y a un festival en cours
+     * Requête GET sans paramètre
+     * Retourne un message de confirmation
+     */
+    async isFestivalInCourse(req,res){
+        try{
+            const festival = await Festival.findOne({
+                where: {
+                    dateDebut: {
+                        [db.Sequelize.Op.lte]: new Date()
+                    },
+                    dateFin: {
+                        [db.Sequelize.Op.gte]: new Date()
+                    }
+                }
+            });
+            if(festival){
+                return res.status(200).json({ message: "Un festival est en cours" });
+            }
+            else{
+                return res.status(404).json({ error: "Aucun festival en cours" });
+            }
+        } catch(error){
+            return res.status(400).json({ error: error.message });
+        }
     }
 
 }
