@@ -137,8 +137,12 @@ const UserController = {
             if(user){
                 const match = await utils.comparePassword(req.body.mdp, user.mdp);
                 if(match){
+                    let returnedUser = {}
+                    returnedUser.pseudo = user.pseudo;
+                    returnedUser.role = user.role;
                     const token = utils.generateToken(user);
-                    return res.status(200).json(token);
+                    returnedUser.token = token;
+                    return res.status(200).json(returnedUser);
                 }else{
                     return res.status(200).json({ error: "Identifiants incorrects" });
                 }

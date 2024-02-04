@@ -68,5 +68,10 @@ router.get('/postes/festival/:id', authenticateToken, PosteController.getPostesB
 // Requête GET avec un paramètre 'id' (ex: /postes/1/referent)
 router.get('/postes/:id/referent', authenticateToken, PosteController.getReferentByPoste);
 
+// Récupérer les bénévoles d'un poste pour un référent
+// Requête GET avec un paramètre 'id' (ex: /postes/1/benevoles)
+router.get('/postes/:id/benevoles', authenticateToken, PosteController.getBenevolesByPoste);
+
+
 
 module.exports = router;

@@ -4,6 +4,7 @@ const utils = require('../utils');
 const Poste = db.Poste;
 const FestivalPoste = db.FestivalPoste;
 const User = db.User;
+const InscriptionCreneauxPoste = db.InscriptionCreneauxPoste;
 
 const PosteController = {
         
@@ -177,6 +178,46 @@ const PosteController = {
             }else{
                 return res.status(404).json({ error: "Ce poste n'existe pas" });
             }
+        }catch(error){
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupérer les bénévoles d'un poste pour un référent
+     * Requête GET avec un paramètre 'id' (ex: /postes/1/benevoles)
+     * Retourne un tableau d'utilisateurs
+     */
+    async getBenevolesByPoste(req,res){
+        try{
+            // Vérifier que l'user est un référent role = 3
+            if(req.user.role < 3){
+                return res.status(403).json({ error: "Vous n'êtes pas autorisé à accéder à cette ressource" });
+            }
+            // Vérifier que le poste existe
+            const poste = await Poste.findByPk(req.params.id);
+            if(!poste){
+                return res.status(404).json({ error: "Ce poste n'existe pas" });
+            }
+
+            const benevoles = await InscriptionCreneauxPoste.findAll({
+                include: db.CreneauxPoste,
+                where: {idPoste: req.params.id}
+            });
+            let benevolesList = [];
+            for(let i=0; i<benevoles.length; i++){
+                let user = await User.findByPk(benevoles[i].idUtilisateur);
+                // Effacer les données sensibles
+                user = user.get({ plain: true });
+                delete user.mdp;
+                delete user.role;
+                delete user.associations;
+                delete user.tailleTshirt;
+                delete user.hebergement;
+                delete user.vegetarien;
+                benevolesList.push(user);
+            }
+            return res.status(200).json(benevoles);
         }catch(error){
             return res.status(400).json({ error: error.message });
         }

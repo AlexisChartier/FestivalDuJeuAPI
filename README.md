@@ -364,6 +364,18 @@ Le projet `FestivalDuJeuAPI` utilise les technologies et bibliothèques suivante
 - **Paramètre :** `id` du poste
 - **Description :** Retourne les informations sur le référent associé à un poste spécifié par son identifiant. Cette route permet aux utilisateurs authentifiés de consulter qui est le référent pour un poste donné.
 
+### Récupérer les Bénévoles d'un Poste pour un Référent
+
+- **Méthode HTTP :** `GET`
+- **Endpoint :** `/postes/:id/benevoles`
+- **Autorisation :** Nécessite un token d'authentification et le role REFERENT
+- **Paramètre :** `id` - L'identifiant du poste dont on souhaite récupérer les bénévoles.
+- **Description :** Cette route permet de récupérer la liste des bénévoles assignés à un poste spécifique. Elle est principalement destinée aux référents de poste qui souhaitent consulter la liste des bénévoles qui leur sont assignés.
+- **Réponse :** La réponse contient une liste des bénévoles assignés au poste spécifié par son `id`. Chaque bénévole est représenté par son nom, prénom, et d'autres informations pertinentes telles que son contact, selon les informations disponibles dans la base de données.
+
+#### Exemple de requête
+
+
 ### Modifier un Poste
 
 - **Méthode HTTP :** `PUT`

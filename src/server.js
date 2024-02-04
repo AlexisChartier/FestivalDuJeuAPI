@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 // Chargement des models et connexion à la DB
 const db = require('./models')
 db.sequelize.authenticate().then(() => console.log('Database connected...')).catch(err => console.log('Error: ' + err))
@@ -10,6 +11,7 @@ db.sequelize.sync({ force: true }).then(async () => {
 })
 
 // Middleware
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 // Routes
