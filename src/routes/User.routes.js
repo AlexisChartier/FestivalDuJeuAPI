@@ -126,7 +126,7 @@ router.get('/hebergement',authenticateToken, UserController.getUserWithHebergeme
 
 // Récupérer le role et le pseudo a partir du token
 // Requête GET sans paramètre
-// Pour un utilisateur connecté
-router.get('/users/role',authenticateToken, UserController.getUserRoleAndNameFromToken);
+// Pour un utilisateur  connecté
+router.get('/me',authenticateToken, UserController.getUserRoleAndNameFromToken);
 
 module.exports = router;

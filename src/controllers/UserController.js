@@ -96,10 +96,10 @@ const UserController = {
             if(user){
                 user = user.get({ plain: true })
                 // Enlever le mot de passe 
+                delete user.mdp;
                 // Si l'utilisateur n'est pas un admin, il ne peut récupérer que des infos superflues
                 if(req.user.role !== 4 && req.user.pseudo !== user.pseudo){
                     // Enlever le mot de passe, l'email, le numéro de téléphone
-                    delete user.mdp;
                     delete user.tel;
                     delete user.nom;
                     delete user.prenom;
@@ -281,14 +281,15 @@ const UserController = {
      */
     async getUserRoleAndNameFromToken(req,res){
         try{
+            console.log(req.user)
             const user = await User.findByPk(req.user.pseudo);
             if(user){
                 const returnedUser = {}
                 returnedUser.role = user.role;
-                returnedUser.nom = user.nom;
+                returnedUser.pseudo = user.pseudo;
                 return res.status(200).json(returnedUser);
             }else{
-                return res.status(404).json({ error: "Utilisateur non trouvé" });
+                return res.status(404).json({ error: "Utilisateur non trouvé"});
             }
         }catch(error){
             return res.status(400).json({ error: error.message });
