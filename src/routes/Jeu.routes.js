@@ -97,6 +97,9 @@ router.post('/jeux/import', authenticateAdmin, upload.single('file'), (req, res)
     if (!req.file) {
         return res.status(400).send('Aucun fichier n\'a été téléchargé.');
     }
+    if(!req.body.idPoste || !req.body.idFestival) {
+        return res.status(400).send('L\'id du poste et l\'id du festival sont requis.');
+    }
 
     const filePath = req.file.path;
     const stream = fs.createReadStream(filePath);
