@@ -102,7 +102,7 @@ const ZoneController = {
      */
     async getZonesByFestival(req,res){
         try{
-            const zones = await Zone.findAll({where: {idFestival: req.params.idFestival}});
+            const zones = await Zone.findAll({where: {idFestival: req.params.id}});
             return res.status(200).json(zones);
         }catch(error){
             return res.status(400).json({ error: error.message });
