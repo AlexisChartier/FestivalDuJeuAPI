@@ -89,7 +89,7 @@ const ZoneController = {
      */
     async getZonesByPoste(req,res){
         try{
-            const zones = await Zone.findAll({where: {idPoste: req.params.idPoste}});
+            const zones = await Zone.findAll({where: {idPoste: req.params.id}});
             return res.status(200).json(zones);
         }catch(error){
             return res.status(400).json({ error: error.message });
