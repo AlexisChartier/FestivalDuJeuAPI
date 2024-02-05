@@ -3,6 +3,7 @@ const utils = require('../utils');
 
 const Poste = db.Poste;
 const FestivalPoste = db.FestivalPoste;
+const Festival = db.Festival;
 const User = db.User;
 const InscriptionCreneauxPoste = db.InscriptionCreneauxPoste;
 
@@ -146,9 +147,14 @@ const PosteController = {
      */
     async getPostesByFestival(req,res){
         try{
+            // Vérifier que le festival existe
+            const festival = await Festival.findByPk(req.params.id);
+            if(!festival){
+                return res.status(404).json({ error: "Ce festival n'existe pas" });
+            }
             const postes = await FestivalPoste.findAll({
                 include: Poste,
-                where: {idFestival: req.params.idFestival}
+                where: {idFestival: req.params.id}
             });
             return res.status(200).json(postes);
         }catch(error){

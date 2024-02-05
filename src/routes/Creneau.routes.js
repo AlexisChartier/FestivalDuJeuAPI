@@ -42,6 +42,18 @@ router.get('/creneaux/poste', CreneauController.getAllCreneauxPoste);
 // Retourne un tableau de créneaux de zone
 router.get('/creneaux/zone', CreneauController.getAllCreneauxZone);
 
+// Récupérer les créneaux d'un poste
+// Requête GET avec un paramètre 'id' (ex: /creneaux/poste/1)
+// Retourne un tableau de créneaux de poste
+router.get('/creneaux/poste/:id', CreneauController.getCreneauxPoste);
+
+// Récupérer les créneaux d'une zone
+// Requête GET avec un paramètre 'id' (ex: /creneaux/zone/1)
+// Retourne un tableau de créneaux de zone
+router.get('/creneaux/zone/:id', CreneauController.getCreneauxZone);
+
+
+
 // Créer des créneaux de poste
 // Requête POST avec un body JSON
 // [{

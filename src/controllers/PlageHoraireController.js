@@ -2,6 +2,7 @@ const db = require('../models');
 const utils = require('../utils');
 
 const PlageHoraire = db.PlageHoraire;
+const Festival = db.Festival;
 
 const PlageHoraireController = {
         
@@ -79,6 +80,11 @@ const PlageHoraireController = {
      */
     async getPlagesHorairesByFestival(req,res){
         try{
+            // Vérifie que le festival existe
+            const festival = await Festival.findByPk(req.params.id);
+            if(!festival){
+                return res.status(404).json({ error: "Ce festival n'existe pas" });
+            }
             const plagesHoraires = await PlageHoraire.findAll({
                 where: {idFestival: req.params.id}
             });

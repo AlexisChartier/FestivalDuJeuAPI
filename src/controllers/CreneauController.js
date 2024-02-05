@@ -21,6 +21,47 @@ const CreneauController = {
     },
 
     /**
+     *  Récupérer tous les créneaux d'un poste
+     * Requête GET avec un paramètre 'id' (ex: /creneaux/poste/1)
+     * Retourne un tableau de créneaux de poste
+     * */
+    async getCreneauxPoste(req,res){
+        try{
+            // vérifier que le poste existe
+            const poste = await Poste.findByPk(req.params.id);
+            if(!poste){
+                return res.status(404).json({ error: "Ce poste n'existe pas" });
+            }
+            const creneaux = await CreneauxPoste.findAll({where: {idPoste: req.params.id}});
+            return res.status(200).json(creneaux);
+        }catch(error){
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupérer tous les créneaux d'une zone
+     * Requête GET avec un paramètre 'id' (ex: /creneaux/zone/1)
+     * Retourne un tableau de créneaux de zone
+     * 
+     */
+    async getCreneauxZone(req,res){
+        try{
+            // vérifier que la zone existe
+            const zone = await Zone.findByPk(req.params.id);
+            if(!zone){
+                return res.status(404).json({ error: "Cette zone n'existe pas" });
+            }
+            const creneaux = await CreneauxZone.findAll({where: {idZone: req.params.id}});
+            return res.status(200).json(creneaux);
+        }catch(error){
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+
+
+    /**
     * Récupérer tous les créneaux de zone
     * Requête GET sans paramètre
     * Retourne un tableau de créneaux de zone
@@ -33,6 +74,7 @@ const CreneauController = {
             return res.status(400).json({ error: error.message });
         }
     },
+
 
     /**
      * Créer des créneaux de poste
