@@ -56,9 +56,10 @@ const PosteController = {
             if(!user){
                 return res.status(400).json({ error: "Le pseudo du référent n'existe pas" });
             }
-            // Mettre à jour le rôle du referent
-            user.role = 3;
-            await user.save();
+            if(user.role < 3){
+                user.role = 3;
+                await user.save();
+            }
             // Créer le poste
             let newPoste = await Poste.create(req.body);
             newPoste = newPoste.get({ plain: true })
