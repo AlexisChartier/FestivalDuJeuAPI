@@ -1,7 +1,7 @@
 const {hashPassword} = require ("../utils")
 module.exports = async (userClass) => {
     const user =  {
-    "pseudo": "admin",
+    "pseudo": "Admin",
     "nom": "Mezghenna",
     "prenom": "romain",
     "tailleTshirt": "S",
@@ -10,7 +10,7 @@ module.exports = async (userClass) => {
     "role": 4,
     "email" : "email",
     "tel" : "0123456789",
-    "mdp" : await hashPassword("db3fee1bfb106ff8418f61c6009ef0a1ec584552c262f8c9fe82b6b693bf70f7")
+    "mdp" : await hashPassword("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918")
     }
 
     await userClass.findOrCreate({ where: { pseudo: user.pseudo }, defaults: user })

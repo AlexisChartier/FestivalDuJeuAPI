@@ -160,46 +160,25 @@ const FestivalController = {
         }
     },
     /**
-     * Savoir si l'utilisateur en cours est inscrit à un festival en cours
-     * Requête GET avec un paramètre 'id' (ex: /festivals/inscription)
+     * Savoir si l'utilisateur en cours est inscrit à un festival 
+     * Requête GET avec un paramètre 'id' (ex: /festivals/:id/inscription)
      * Retourne un message de confirmation
      */
     async isRegistered(req,res){
         try{
-            const festival = await Festival.findOne({
+            const festivalUser = await FestivalUser.findOne({
                 where: {
-                    dateDebut: {
-                        [db.Sequelize.Op.lte]: new Date()
-                    },
-                    dateFin: {
-                        [db.Sequelize.Op.gte]: new Date()
-                    }
+                    idFestival: req.params.id,
+                    pseudo: req.user.pseudo
                 }
             });
-            if(festival){
-                const user = await User.findByPk(req.user.pseudo);
-                if(user){
-                    const isRegistered = await FestivalUser.findOne({
-                        where: {
-                            idFestival: festival.idFestival,
-                            pseudo: user.pseudo
-                        }
-                    });
-                    if(isRegistered){
-                        return res.status(200).json({ message: "L'utilisateur est inscrit à un festival en cours" });
-                    }
-                    else{
-                        return res.status(404).json({ error: "L'utilisateur n'est pas inscrit à un festival en cours" });
-                    }
-                } else {
-                    return res.status(404).json({ error: "L'utilisateur n'existe pas" });
-                }
+            if(festivalUser){
+                return res.status(200).json({ message: "L'utilisateur est inscrit à ce festival" });
             }
             else{
-                return res.status(404).json({ error: "Aucun festival en cours" });
+                return res.status(404).json({ error: "L'utilisateur n'est pas inscrit à ce festival" });
             }
-            
-        } catch(error){
+        }catch(error){
             return res.status(400).json({ error: error.message });
         }
     },

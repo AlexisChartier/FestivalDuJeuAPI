@@ -120,6 +120,17 @@ router.delete('/creneaux/poste/:id', authenticateAdmin, CreneauController.delete
 // Retourne un message de confirmation
 router.delete('/creneaux/zone/:id', authenticateAdmin, CreneauController.deleteCreneauZone);
 
+// Récupérer le nombre de bénévoles inscrits à un créneau poste
+// Requête GET avec un paramètre 'id' (ex: /creneauxPoste/1/nombrePersonne)
+// Retourne le nombre de bénévoles inscrits
+router.get('/creneauxPoste/:id/nombrePersonne', authenticateToken, CreneauController.getNombrePersonneInscriteCreneauPoste);
+
+// Récupérer le nombre de bénévoles inscrits à un créneau zone
+// Requête GET avec un paramètre 'id' (ex: /creneauxZone/1/nombrePersonne)
+// Retourne le nombre de bénévoles inscrits
+router.get('/creneauxZone/:id/nombrePersonne', authenticateToken, CreneauController.getNombrePersonneInscriteCreneauZone);
+
+
 
 
 

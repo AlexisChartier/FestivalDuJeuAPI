@@ -87,6 +87,7 @@ router.get('/users/check/:pseudo', UserController.checkIfUserExists);
 // }
 // Pour tout le monde
 router.post('/users/login', loginValidationRules, (req, res) => {
+    console.log(req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json(validationErrorMessage(errors.array()));

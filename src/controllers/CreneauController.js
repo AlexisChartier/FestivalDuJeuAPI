@@ -4,6 +4,8 @@ const utils = require('../utils');
 const CreneauxPoste = db.CreneauxPoste;
 const Poste = db.Poste;
 const CreneauxZone = db.CreneauxZone;
+const InscriptionCreneauxPoste = db.InscriptionCreneauxPoste;
+
 
 const CreneauController = {
         
@@ -191,6 +193,44 @@ const CreneauController = {
             if(creneau){
                 await creneau.update(req.body);
                 return res.status(200).json(creneau);
+            }else{
+                return res.status(404).json({ error: "Ce créneau de zone n'existe pas" });
+            }
+        }catch(error){
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupérer le nombre de personne inscrite à un créneau poste
+     * Requête GET avec un paramètre 'id' (ex: /creneauxPoste/1/nombrePersonne)
+     * Retourne le nombre de personne inscrite
+     */
+    async getNombrePersonneInscriteCreneauPoste(req,res){
+        try{
+            const creneau = await CreneauxPoste.findByPk(req.params.id);
+            if(creneau){
+                const nombrePersonne = await InscriptionCreneauxPoste.count({where: {idCreneauPoste: req.params.id}});
+                return res.status(200).json({ nombrePersonne });
+            }else{
+                return res.status(404).json({ error: "Ce créneau de poste n'existe pas" });
+            }
+        }catch(error){
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    /**
+     * Récupérer le nombre de personne inscrite à un créneau zone
+     * Requête GET avec un paramètre 'id' (ex: /creneauxZone/1/nombrePersonne)
+     * Retourne le nombre de personne inscrite
+     */
+    async getNombrePersonneInscriteCreneauZone(req,res){
+        try{
+            const creneau = await CreneauxZone.findByPk(req.params.id);
+            if(creneau){
+                const nombrePersonne = await InscriptionCreneauxZone.count({where: {idCreneauZone: req.params.id}});
+                return res.status(200).json({ nombrePersonne });
             }else{
                 return res.status(404).json({ error: "Ce créneau de zone n'existe pas" });
             }

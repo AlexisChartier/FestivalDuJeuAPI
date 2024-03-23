@@ -128,7 +128,7 @@ router.delete('/festivals/:id', authenticateAdmin, FestivalController.deleteFest
 
 // Savoir si l'utilisateur en cours est inscrit à un festival en cours 
 // Requête GET avec un paramètre 'id' (ex: /festivals/1/inscription)
-router.get('/festivals/inscription', authenticateToken, FestivalController.isRegistered);
+router.get('/festivals/:id/inscription', authenticateToken, FestivalController.isRegistered);
 
 // S'inscrire à un festival
 // Requête POST avec un body contenant un idFestival

@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const db = require('../models'); 
 const utils = require('../utils');
 
@@ -127,13 +128,13 @@ const InscriptionController = {
                         return res.status(400).json({ error: "Le créneau de poste est complet" });
                     }
                     // Vérifier si l'utilisateur est déjà inscrit à un créneau de poste à cette plage horaire
-                    const inscriptions = await InscriptionPoste.findAll({where: {pseudo: req.body[i].pseudo}});
-                    for(let j=0; j<inscriptions.length; j++){
-                        const creneauInscription = await CreneauxPoste.findByPk(inscriptions[j].idCreneauPoste);
-                        if(creneauInscription.plageHoraire === creneau.plageHoraire){
-                            return res.status(400).json({ error: "L'utilisateur est déjà inscrit à un créneau qui se déroule en même temps" });
-                        }
-                    }
+                    // const inscriptions = await InscriptionPoste.findAll({where: {pseudo: req.body[i].pseudo}});
+                    // for(let j=0; j<inscriptions.length; j++){
+                    //     const creneauInscription = await CreneauxPoste.findByPk(inscriptions[j].idCreneauPoste);
+                    //     if(creneauInscription.plageHoraire === creneau.plageHoraire){
+                    //         return res.status(400).json({ error: "L'utilisateur est déjà inscrit à un créneau qui se déroule en même temps" });
+                    //     }
+                    // }
                 }
             }
             const inscriptions = await InscriptionPoste.bulkCreate(req.body);
@@ -179,13 +180,13 @@ const InscriptionController = {
                         return res.status(400).json({ error: "Le créneau de zone est complet" });
                     }
                     // Vérifier si l'utilisateur est déjà inscrit à un créneau de zone à cette plage horaire
-                    const inscriptions = await InscriptionZone.findAll({where: {pseudo: req.body[i].pseudo}});
-                    for(let j=0; j<inscriptions.length; j++){
-                        const creneauInscription = await CreneauxZone.findByPk(inscriptions[j].idCreneauZone);
-                        if(creneauInscription.plageHoraire === creneau.plageHoraire){
-                            return res.status(400).json({ error: "L'utilisateur est déjà inscrit à un créneau qui se déroule en même temps" });
-                        }
-                    }
+                    // const inscriptions = await InscriptionZone.findAll({where: {pseudo: req.body[i].pseudo}});
+                    // for(let j=0; j<inscriptions.length; j++){
+                    //     const creneauInscription = await CreneauxZone.findByPk(inscriptions[j].idCreneauZone);
+                    //     if(creneauInscription.plageHoraire === creneau.plageHoraire){
+                    //         return res.status(400).json({ error: "L'utilisateur est déjà inscrit à un créneau qui se déroule en même temps" });
+                    //     }
+                    // }
                 }
             }
             const inscriptions = await InscriptionZone.bulkCreate(req.body);
@@ -220,8 +221,13 @@ const InscriptionController = {
      */
     async desinscrirePoste(req,res){
         try{
-            const inscription = await InscriptionPoste.findByPk(req.params.id);
+            
+            const inscription = await InscriptionPoste.findOne({where: {idCreneauPoste: req.params.id, pseudo: req.user.pseudo}});
             if(inscription){
+                // Vérifier que l'utilisateur est bien celui connecté ou qu'il est admin
+                if(inscription.pseudo !== req.user.pseudo  && req.user.role !== 4){
+                    return res.status(400).json({ error: "L'utilisateur n'est pas celui connecté" });
+                }
                 await inscription.destroy();
                 return res.status(200).json({ message: "L'inscription a bien été supprimée" });
             }else{
@@ -239,8 +245,12 @@ const InscriptionController = {
      */
     async desinscrireZone(req,res){
         try{
-            const inscription = await InscriptionZone.findByPk(req.params.id);
+            const inscription = await InscriptionZone.findOne({where: {idCreneauZone: req.params.id, pseudo: req.user.pseudo}});
             if(inscription){
+                // Vérifier que l'utilisateur est bien celui connecté ou qu'il est admin
+                if(inscription.pseudo !== req.user.pseudo  && req.user.role !== 4){
+                    return res.status(400).json({ error: "L'utilisateur n'est pas celui connecté" });
+                }
                 await inscription.destroy();
                 return res.status(200).json({ message: "L'inscription a bien été supprimée" });
             }else{

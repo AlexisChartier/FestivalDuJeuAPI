@@ -70,6 +70,14 @@ router.get('/inscriptions/postes/festival/:idFestival/:pseudo', authenticateToke
 // Retourne un tableau de créneaux de zone
 router.get('/inscriptions/zones/festival/:idFestival/:pseudo', authenticateToken, InscriptionController.getInscriptionsZoneByFestivalByUser);
 
+// Delete une inscription de poste
+// Requête DELETE avec un paramètre 'id' (ex: /inscriptions/poste/1)
+router.delete('/inscriptions/poste/:id', authenticateToken, InscriptionController.desinscrirePoste);
+
+// Delete une inscription de zone
+// Requête DELETE avec un paramètre 'id' (ex: /inscriptions/zone/1)
+router.delete('/inscriptions/zone/:id', authenticateToken, InscriptionController.desinscrireZone);
+
 
 
 module.exports = router;
