@@ -15,12 +15,12 @@ module.exports = {
         host : process.env.DB_HOST,
         dialect : 'mysql',
         dialectModule: mysql,
-        // dialectOptions: {
-        //     ssl: {
-        //         ca: fs.readFileSync(ca).toString()
-        //     },
-        //     connectTimeout: 20000
-        // },
+        dialectOptions: {
+            ssl: {
+                ca: fs.readFileSync(ca).toString()
+            },
+            connectTimeout: 20000
+        },
         pool: {
             max: 10,
             min: 0,
