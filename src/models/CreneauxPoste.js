@@ -9,13 +9,13 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
+    idPoste: {
+      type: DataTypes.INTEGER
+    },
     plageHoraire: {
       type: DataTypes.INTEGER
     },
     nombreMax: {
-      type: DataTypes.INTEGER
-    },
-    idPoste: {
       type: DataTypes.INTEGER
     }
   }, {

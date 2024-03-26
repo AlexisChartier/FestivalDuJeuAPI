@@ -31,29 +31,26 @@ const InscriptionController = {
             }
             // Récupérer les créneaux de poste auxquels l'utilisateur est inscrit
             const inscriptions = await InscriptionPoste.findAll({
-                attributes : ['idCreneauPoste'],
                 where: {pseudo: req.params.pseudo},
                 include: {
                     model: CreneauxPoste,
-                    attributes : ['plageHoraire'],
                     include : {
                         model: FestivalPoste,
-                        where: {idFestival: req.params.idFestival},
-                        attributes : ['idPoste']
-                    },
-                    on :{idCreneauPoste: db.Sequelize.col('InscriptionCreneauxPoste.idCreneauPoste')}
-                } 
+                        where: {idFestival: req.params.idFestival}
+                        
+                    }
+                }
             });
-            // Réorganiser les données pour les retourner sous forme de tableau
-            let creneaux = [];
-            for(let i=0; i<inscriptions.length; i++){
-                let inscription = {};
-                inscription.idCreneauPoste = inscriptions[i].idCreneauPoste;
-                inscription.plageHoraire = inscriptions[i].CreneauxPoste.plageHoraire;
-                inscription.idPoste = inscriptions[i].CreneauxPoste.FestivalPostes[0].idPoste;
-                creneaux.push(inscription);
-            }
-            return res.status(200).json(creneaux);
+            //Réorganiser les données pour les retourner sous forme de tableau
+            // let creneaux = [];
+            // for(let i=0; i<inscriptions.length; i++){
+            //     let inscription = {};
+            //     inscription.idCreneauPoste = inscriptions[i].idCreneauPoste;
+            //     inscription.plageHoraire = inscriptions[i].CreneauxPoste.plageHoraire;
+            //     inscription.idPoste = inscriptions[i].CreneauxPoste.FestivalPostes[0].idPoste;
+            //     creneaux.push(inscription);
+            // }
+            return res.status(200).json(inscriptions);
         }catch(error){
             return res.status(400).json({ error: error.message });
         }

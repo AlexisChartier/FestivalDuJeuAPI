@@ -3,6 +3,7 @@ const utils = require('../utils');
 
 const CreneauxPoste = db.CreneauxPoste;
 const Poste = db.Poste;
+const Zone = db.Zone;
 const CreneauxZone = db.CreneauxZone;
 const InscriptionCreneauxPoste = db.InscriptionCreneauxPoste;
 
